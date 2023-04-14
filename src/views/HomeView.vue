@@ -56,18 +56,22 @@ export default {
       if(text === '/подсказка') return
 
       if(type === 'outgoing') {
-        let decrypted = cryptojs.AES.decrypt(this.encrypted, text).toString(
+        let decrypted = cryptojs.AES.decrypt(this.encrypted, text.toLowerCase()).toString(
           cryptojs.enc.Utf8
         );
 
         console.log(decrypted)
 
         if(decrypted) {
-          this.send('incoming', "ВЕРНО! прими от меня небольшой подгон 🤪🤪🤪 (это промокод на активацию подписка VK Music на 3 месяца):")
-          this.send('incoming', decrypted)
-          this.send('incoming', 'Ссылка на активацию (клик)', true);
+          setTimeout(() => {
+            this.send('incoming', "ВЕРНО! прими от меня небольшой подгон 🤪🤪🤪 (это промокод на активацию подписка VK Music на 3 месяца):")
+            this.send('incoming', decrypted)
+            this.send('incoming', 'Ссылка на активацию (клик)', true);
+          }, 1000)
         } else {
-          this.send('incoming', 'Неверно! чтобы воспользоваться подсказкой, введи команду /подсказка')
+          setTimeout(() => {
+            this.send('incoming', 'Неверно! чтобы воспользоваться подсказкой, введи команду /подсказка')
+          }, 1000)
         }
       }
 
@@ -80,7 +84,9 @@ export default {
       if (this.input === '') return;
       this.send('outgoing', this.input)
       if(this.input === '/подсказка') {
-        this.send('incoming', "подсказка: цвет + 😺 + число (без пробелов)")
+        setTimeout(() => {
+          this.send('incoming', "подсказка: цвет + 😺 + число (без пробелов)")
+        }, 1000)
       }
       this.input = '';
     }
